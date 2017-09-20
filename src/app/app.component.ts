@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav,Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
 
 @Component({
   templateUrl: 'app.html'
@@ -11,6 +13,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = TabsPage;
+  //사이드 메뉴 목록
   pages: Array<{title:string,component:any}>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
@@ -21,12 +24,13 @@ export class MyApp {
       splashScreen.hide();
     });
 
-    this.page = [
+    this.pages = [
       {title : 'Home', component: HomePage},
-      {title : 'List', component: ListComponent}
+      {title : 'List', component: ListPage}
     ]
   }
 
+  //페이지 이동
   openPage(page){
     this.nav.setRoot(page.component);
   }
