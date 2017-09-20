@@ -1,11 +1,35 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      글쓰기
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+    <!-- <ion-card>
+        <ion-card-header>
+            Wrting Form
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list no-line>
+                <ion-item>
+                    <ion-input type="text" placeholder="Title"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-textarea placeholder="Enter a description"></ion-textarea>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card> -->
+    <ion-list>
+        <ion-item>
+            <ion-label color="primary" stacked>제목</ion-label>
+            <ion-input type="text" placeholder="Title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary" stacked>내용</ion-label>
+            <ion-textarea placeholder="Enter a description"></ion-textarea>
+        </ion-item>
+    </ion-list>
 </ion-content>
