@@ -11,7 +11,7 @@ import { BoardServiceProvider } from '../../providers/board-service/board-servic
 export class BoardDetailPage{
 
   pk:string = '';
-  boardItem:Item;
+  boardItem = {};
 
   constructor(
       public navCtrl: NavController,
@@ -23,27 +23,27 @@ export class BoardDetailPage{
   }
 
   getItem(){
-    // let params = {
-    //   'pk' : this.pk
-    // };
-    //
-    // this.boardServiceProvider.callItem(params)
-    // .then(
-    //   res => {
-    //     this.boardItem = res.item;
-    //   }
-    // )
-    // .catch(
-    //   error => {
-    //     console.log(error);
-    //     this.boardItem = new Item();
-    //     this.boardItem["title"] = 'news';
-    //     this.boardItem["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-    //   }
-    // )
-    let n = new Item();
-    n.title = "news";
-    this.boardItem = n;
-    this.boardItem["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+    let params = {
+      'pk' : this.pk
+    };
+
+    this.boardServiceProvider.callItem(params)
+    .then(
+      res => {
+        this.boardItem = res.result.item;
+      }
+    )
+    .catch(
+      error => {
+        console.log(error);
+        this.boardItem = new Item();
+        this.boardItem["title"] = 'news';
+        this.boardItem["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+      }
+    )
+    // let n = new Item();
+    // n.title = "news";
+    // this.boardItem = n;
+    // this.boardItem["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
   }
 }
