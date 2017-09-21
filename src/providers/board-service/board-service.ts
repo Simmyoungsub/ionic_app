@@ -11,23 +11,23 @@ import { HttpService } from '../http/httpService';
 */
 @Injectable()
 export class BoardServiceProvider {
-
+  api:string = 'http://192.168.0.151:8000/api/board/';
   constructor(
       public http: Http,
       private httpService:HttpService
   ) {
-    console.log('Hello BoardServiceProvider Provider');
+    // console.log('Hello BoardServiceProvider Provider');
   }
 
   callItemsList(){
-      let api = 'http://192.168.0.151:8000/api/board/';
-
-      return this.httpService.requestGet(api,{}).toPromise();
+      return this.httpService.requestGet(this.api,{}).toPromise();
   }
 
   saveItem(params){
-      let api = 'http://192.168.0.151:8000/api/board/';
+      return this.httpService.requestPost(this.api,params).toPromise();
+  }
 
-      return this.httpService.requestPost(api,params).toPromise();
+  callItem(params){
+    return this.httpService.requestGet(this.api,params).toPromise();
   }
 }

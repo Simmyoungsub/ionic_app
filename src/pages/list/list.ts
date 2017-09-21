@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 /**
  * Generated class for the ListPage page.
@@ -15,7 +15,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ListPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private menuController:MenuController, public navCtrl: NavController, public navParams: NavParams) {
+    this.menuController.swipeEnable(false);
   }
 
   ionViewDidLoad() {

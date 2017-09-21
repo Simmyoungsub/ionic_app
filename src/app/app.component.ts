@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav,Platform } from 'ionic-angular';
+import { Nav,Platform,NavController,App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -16,7 +16,7 @@ export class MyApp {
   //사이드 메뉴 목록
   pages: Array<{title:string,component:any}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(private app:App,platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -26,12 +26,15 @@ export class MyApp {
 
     this.pages = [
       {title : 'Home', component: HomePage},
-      {title : 'List', component: ListPage}
+      {title : 'List', component: ListPage},
+      {title : 'Tabs Page', component: TabsPage}
     ]
   }
 
   //페이지 이동
   openPage(page){
-    this.nav.setRoot(page.component);
+    //this.nav.setRoot(page.component);
+    this.app.getRootNav().setRoot(page.component);
+    // this.navCtrl.setRoot(page.component);
   }
 }

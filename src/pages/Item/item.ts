@@ -1,4 +1,5 @@
 export class Item{
-    public seq:number;
-    public title: string;
+    seq:number;
+    title: string;
+    content:string;
 };

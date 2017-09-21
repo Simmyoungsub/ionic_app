@@ -1,8 +1,10 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-buttons start>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
@@ -11,7 +13,8 @@
   <ion-list>
       <ion-item *ngFor="let item of items">
           <h2>{{item.title}}</h2>
-          <button ion-button clear item-right (click)="viewItem(item.data)">View</button>
+          <p>{{item.content}}</p>
+          <button ion-button clear item-right (click)="viewItem(item.seq)">View</button>
       </ion-item>
   </ion-list>
 </ion-content>
