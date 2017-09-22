@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Item } from '../Item/item';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
+import { BoardModifyPage } from './board_modify';
 
 @Component({
   selector:'page-board-detail',
@@ -45,5 +46,9 @@ export class BoardDetailPage{
     n.title = "news";
     this.boardItem = n;
     this.boardItem["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+  }
+
+  goModify(pk){
+    this.navCtrl.push(BoardModifyPage,{'item':this.boardItem});
   }
 }

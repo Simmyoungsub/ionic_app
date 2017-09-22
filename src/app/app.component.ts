@@ -27,7 +27,7 @@ export class MyApp {
   // pages: Array<{title:string,component:any}>;
   pages : PageInterface[] = [
     {title : 'Home', name:'HomePage',component: HomePage, tabComponent:HomePage, index:0,icon:'home'},
-    {title : 'List', name:'ListPage', component: ListPage, tabComponent: ListPage, icon: 'list' },
+    {title : 'List', name:'ListPage', component: ListPage, tabComponent: HomePage, index:2,icon: 'list' },
     // {title : 'Tabs Page', component: TabsPage}
   ]
 
@@ -57,8 +57,10 @@ export class MyApp {
     if (this.nav.getActiveChildNavs().length && page.index != undefined) {
       this.nav.getActiveChildNavs()[0].select(page.index);
     } else {
-      this.nav.setRoot(page.component, params);
+      this.nav.setRoot(page.component);
     }
+  //  this.nav.setRoot(page.component);
+    //this.nav.setRoot(TabsPage);
     //this.nav.setRoot(page.component);
     // this.app.getRootNav().setRoot(page.component);
     // this.navCtrl.setRoot(page.component);

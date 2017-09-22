@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ListPage } from '../pages/list/list';
 import { BoardDetailPage } from '../pages/home/board_detail';
+import { BoardModifyPage } from '../pages/home/board_modify';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,7 +25,8 @@ import { HttpService } from '../providers/http/httpService';
     HomePage,
     TabsPage,
     ListPage,
-    BoardDetailPage
+    BoardDetailPage,
+    BoardModifyPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { HttpService } from '../providers/http/httpService';
     HomePage,
     TabsPage,
     ListPage,
-    BoardDetailPage
+    BoardDetailPage,
+    BoardModifyPage
   ],
   providers: [
     StatusBar,

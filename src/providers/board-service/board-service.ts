@@ -27,6 +27,10 @@ export class BoardServiceProvider {
       return this.httpService.requestPost(this.api,params).toPromise();
   }
 
+  updateItem(params){
+    return this.httpService.requestPut(this.api,params).toPromise();
+  }
+
   callItem(params){
     return this.httpService.requestGet(this.api,params).toPromise();
   }

@@ -36,4 +36,10 @@ export class HttpService {
 
       return this.http.post(url,JSON.stringify(params),{headers:headers}).map(res => res.json());
   }
+
+  requestPut(url,params){
+      let headers = new Headers({'Content-Type':'application/json'});
+
+      return this.http.put(url,JSON.stringify(params),{headers:headers}).map(res => res.json());
+  }
 }
