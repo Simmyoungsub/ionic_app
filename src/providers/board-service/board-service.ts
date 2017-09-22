@@ -32,6 +32,7 @@ export class BoardServiceProvider {
   }
 
   callItem(params){
-    return this.httpService.requestGet(this.api,params).toPromise();
+    let url = this.api + params["pk"]+'/';
+    return this.httpService.requestGet(url,params).toPromise();
   }
 }

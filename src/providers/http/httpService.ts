@@ -18,15 +18,21 @@ export class HttpService {
 
 
   requestGet(url,params){
-      url += '?';
+    //   url += '?';
 
       let headers = new Headers({'Content-Type':'application/json'})
 
-      for(let key in params){
-        url += key + '=' + params[key]+"&";
-      }
+    //   for(let key in params){
+    //     url += key + '=' + params[key]+"&";
+    //   }
+      //
+      //
+    //   if(url[url.length-1] === "&"){
+    //       url = url.slice(0,-1);
+    //       url += '/';
+    //   }
 
-      url = url.slice(0,-1);
+      console.log(url);
 
       return this.http.get(url,{headers:headers}).map(res=>res.json());
   }
