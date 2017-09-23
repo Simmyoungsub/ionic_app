@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Item } from '../Item/item';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
 import { BoardModifyPage } from './board_modify';
@@ -17,7 +17,8 @@ export class BoardDetailPage{
   constructor(
       public navCtrl: NavController,
       private navParams: NavParams,
-      private boardServiceProvider:BoardServiceProvider
+      private boardServiceProvider:BoardServiceProvider,
+      private alertCtrl:AlertController
   ) {
     this.pk = this.navParams.get('seq');
     this.getItem();
@@ -37,15 +38,21 @@ export class BoardDetailPage{
     .catch(
       error => {
         console.log(error);
-        this.boardItem = new Item();
-        this.boardItem["title"] = 'news';
-        this.boardItem["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+        let alert = this.alertCtrl.create({
+          title: '알림',
+          subTitle: '처리중 오류가 발생하였습니다.',
+          buttons : [
+            {
+              text : '확인',
+              handler : () => {
+                this.navCtrl.popToRoot();
+              }
+            }
+          ]
+        });
+        alert.present();
       }
     )
-    // let n = new Item();
-    // n.title = "news";
-    // this.boardItem = n;
-    // this.boardItem["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
   }
 
   goModify(pk){

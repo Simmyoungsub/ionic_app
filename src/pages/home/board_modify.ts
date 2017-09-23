@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Item } from '../Item/item';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
 
@@ -10,14 +10,15 @@ import { BoardServiceProvider } from '../../providers/board-service/board-servic
 
 export class BoardModifyPage{
 
-  item = {};
+  item = {'title':'','content':''};
   pk: string;
   boardItem:Item;
 
   constructor(
       public navCtrl: NavController,
       private navParams: NavParams,
-      private boardServiceProvider:BoardServiceProvider
+      private boardServiceProvider:BoardServiceProvider,
+      private alertCtrl:AlertController
   ) {
     this.item = this.navParams.get('item');
     this.pk = this.item["seq"];
@@ -26,14 +27,27 @@ export class BoardModifyPage{
 
   confirm(){
     let params = {
-      'pk' : this.pk
+      'pk' : this.pk,
+      'title' : this.item.title,
+      'content' :  this.item.content
     };
 
     this.boardServiceProvider.updateItem(params)
     .then(
       res => {
-        //팝업띄우고 처리하는 걸로....
-        this.navCtrl.popToRoot();
+          let alert = this.alertCtrl.create({
+            title: '알림',
+            subTitle: '저장되었습니다.',
+            buttons : [
+              {
+                text : '확인',
+                handler : () => {
+                  this.navCtrl.popToRoot();
+                }
+              }
+            ]
+          });
+          alert.present();
       }
     )
     .catch(

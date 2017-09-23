@@ -7,7 +7,7 @@ import { HomePage } from '../home/home';
   selector: 'page-about',
   templateUrl: 'about.html'
 })
-export class AboutPage {
+export class AboutPage{
 
   item = {'title':'','content':''};
 
@@ -20,40 +20,42 @@ export class AboutPage {
   }
 
   saveItem(){
-    // this.boardServiceProvider.saveItem(this.item)
-    // .then(
-    //   res => {
-    //     let alert = this.alertCtrl.create({
-    //       title: '알림',
-    //       content: '저장되었습니다.'
-    //       buttons : [
-    //         text : '확인',
-    //         handler : () => {
-    //           this.navCtrl.popToRoot();
-    //         }
-    //       ]
-    //     });
-    //     alert.present();
-    //   }
-    // )
-    // .catch(
-    //   error => {
-    //     console.log(error);
-    //   }
-    // )
-    let alert = this.alertCtrl.create({
-      title: '알림',
-      subTitle: '저장되었습니다.',
-      buttons : [
-        {
-          text : '확인',
-          handler : () => {
-            this.navCtrl.popToRoot();
-          }
-        }
-      ]
-    });
-    alert.present();
+    this.boardServiceProvider.saveItem(this.item)
+    .then(
+      res => {
+          let alert = this.alertCtrl.create({
+            title: '알림',
+            subTitle: '저장되었습니다.',
+            buttons : [
+              {
+                text : '확인',
+                handler : () => {
+                  this.navCtrl.parent.select(0);
+                }
+              }
+            ]
+          });
+          alert.present();
+      }
+    )
+    .catch(
+      error => {
+        console.log(error);
+        let alert = this.alertCtrl.create({
+          title: '알림',
+          subTitle: '처리중 오류가 발생하였습니다.',
+          buttons : [
+            {
+              text : '확인',
+              handler : () => {
+                this.navCtrl.popToRoot();
+              }
+            }
+          ]
+        });
+        alert.present();
+      }
+    )
   }
 
   cancel(){

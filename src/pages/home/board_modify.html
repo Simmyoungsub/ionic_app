@@ -15,11 +15,11 @@
     <ion-list>
         <ion-item>
             <ion-label color="primary" stacked>제목</ion-label>
-            <ion-input type="text" placeholder="Title"></ion-input>
+            <ion-input type="text" placeholder="Title" [(ngModel)]="item.title" name="title"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" stacked>내용</ion-label>
-            <ion-textarea placeholder="Enter a description"></ion-textarea>
+            <ion-textarea placeholder="Enter a description" [(ngModel)]="item.content" name="content"></ion-textarea>
         </ion-item>
     </ion-list>
 </ion-content>

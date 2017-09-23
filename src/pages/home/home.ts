@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Component,OnInit } from '@angular/core';
+import { NavController, AlertController } from 'ionic-angular';
 import { Item } from '../Item/item';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
 import { BoardDetailPage } from './board_detail';
@@ -8,22 +8,29 @@ import { BoardDetailPage } from './board_detail';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
     items = Array<Item>();
 
     constructor(
         public navCtrl: NavController,
-        private boardServiceProvider:BoardServiceProvider
+        private boardServiceProvider:BoardServiceProvider,
+        private alertCtrl:AlertController
     ) {
         this.getItems();
     }
 
+    ngOnInit(){
+        console.log('load');
+    }
+
     getItems(){
-        this.boardServiceProvider.callItemsList()
-        .then(
+        let promise = this.boardServiceProvider.callItemsList();
+
+        promise.then(
             res => {
                 if(res.result.msg === 'success'){
+                    this.items = [];
                     let list = res.result.items;
 
                     for(let i=0;i<list.length;i++){
@@ -33,53 +40,56 @@ export class HomePage {
                         item["content"] = list[i]["content"];
                         this.items.push(item);
                     }
-                }else{
-                    for(let i=0;i<5;i++){
-                        let item = new Item();
-                        item["title"] = 'news';
-                        item["seq"] = i+1;
-                        item["content"] = "aaaaaaaaa";
-                        this.items.push(item);
-                    }
                 }
             }
         )
         .catch(
             error => {
                 console.log(error);
-                for(let i=0;i<5;i++){
-                    let item = new Item();
-                    item["title"] = 'news';
-                    item["seq"] = i+1;
-                    item["content"] = 'aaaaaaaaaaaaa';
-                    this.items.push(item);
-                }
+                let alert = this.alertCtrl.create({
+                  title: '알림',
+                  subTitle: '처리중 오류가 발생하였습니다.',
+                  buttons : [
+                    {
+                      text : '확인',
+                      handler : () => {
+                        this.navCtrl.popToRoot();
+                      }
+                    }
+                  ]
+                });
+                alert.present();
             }
         )
-        // for(let i=0;i<5;i++){
-        //     let item = new Item();
-        //     item["title"] = 'news';
-        //     item["content"] = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-        //     item["seq"] = i+1;
-        //     this.items.push(item);
-        // }
+
+        return promise;
+
     }
 
     viewItem(seq){
       this.navCtrl.push(BoardDetailPage,{'seq':seq});
     }
-
-    saveItems(item){
-        this.boardServiceProvider.saveItem(item)
-        .then(
-            res => {
-                console.log(res);
-            }
+    /**
+        refresher 시 호출되는 콜백
+    */
+    doRefresh(refresher){
+        setTimeout(
+            () => {
+                this.getItems().then(
+                    res => {
+                        refresher.complete();
+                    }
+                )
+            },1000
         )
-        .catch(
-            error => {
-                console.log(error);
-            }
-        );
+    }
+
+    /**
+        navigating시 콜하는 함수
+        navigating life cycle 참고
+        http://blog.ionic.io/navigating-lifecycle-events/
+    */
+    ionViewWillEnter(){
+        this.getItems();
     }
 }
