@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { Item } from '../Item/item';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
@@ -8,10 +8,13 @@ import { BoardDetailPage } from './board_detail';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements OnInit{
+export class HomePage{
 
     items = Array<Item>();
 
+    /**
+        생성자
+    */
     constructor(
         public navCtrl: NavController,
         private boardServiceProvider:BoardServiceProvider,
@@ -20,10 +23,9 @@ export class HomePage implements OnInit{
         this.getItems();
     }
 
-    ngOnInit(){
-        console.log('load');
-    }
-
+    /**
+        게시글 목록 생성
+    */
     getItems(){
         let promise = this.boardServiceProvider.callItemsList();
 
@@ -66,6 +68,9 @@ export class HomePage implements OnInit{
 
     }
 
+    /**
+        상세 페이지로 이동
+    */
     viewItem(seq){
       this.navCtrl.push(BoardDetailPage,{'seq':seq});
     }
@@ -91,5 +96,50 @@ export class HomePage implements OnInit{
     */
     ionViewWillEnter(){
         this.getItems();
+    }
+
+    /**
+        게시글 삭제
+    */
+    deleteItem(item){
+        this.boardServiceProvider.removeItem(item.seq)
+        .then(
+            res => {
+                if(res.result.msg === 'success'){
+                    let alert = this.alertCtrl.create({
+                      title: '알림',
+                      subTitle: '삭제를 완료하였습니다.',
+                      buttons : [
+                        {
+                          text : '확인',
+                          handler : () => {
+                            this.getItems();
+                          }
+                        }
+                      ]
+                    });
+                    alert.present();
+                }
+            }
+        )
+        .catch(
+            error => {
+                console.log(error);
+                let alert = this.alertCtrl.create({
+                  title: '알림',
+                  subTitle: '처리중 오류가 발생하였습니다.',
+                  buttons : [
+                    {
+                      text : '확인',
+                      handler : () => {
+                        this.getItems();
+                      }
+                    }
+                  ]
+                });
+                alert.present();
+            }
+        )
+
     }
 }

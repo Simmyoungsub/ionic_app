@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav,Platform,NavController,App } from 'ionic-angular';
+import { Nav,Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -28,22 +28,13 @@ export class MyApp {
   pages : PageInterface[] = [
     {title : 'Home', name:'HomePage',component: HomePage, tabComponent:HomePage, index:0,icon:'home'},
     {title : 'List', name:'ListPage', component: ListPage, tabComponent: HomePage, index:2,icon: 'list' },
-    // {title : 'Tabs Page', component: TabsPage}
   ]
 
-  constructor(private app:App,platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
-
-    // this.pages = [
-    //   {title : 'Home', component: HomePage},
-    //   {title : 'List', component: ListPage},
-    //   {title : 'Tabs Page', component: TabsPage}
-    // ]
   }
 
   //페이지 이동
@@ -59,10 +50,5 @@ export class MyApp {
     } else {
       this.nav.setRoot(page.component);
     }
-  //  this.nav.setRoot(page.component);
-    //this.nav.setRoot(TabsPage);
-    //this.nav.setRoot(page.component);
-    // this.app.getRootNav().setRoot(page.component);
-    // this.navCtrl.setRoot(page.component);
   }
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
-import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-about',

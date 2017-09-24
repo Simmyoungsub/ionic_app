@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { Item } from '../Item/item';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
 import { BoardModifyPage } from './board_modify';
 
