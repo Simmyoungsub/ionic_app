@@ -8,7 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { ListPage } from '../pages/list/list';
+// import { ListPage } from '../pages/list/list';
 import { BoardDetailPage } from '../pages/home/board_detail';
 import { BoardModifyPage } from '../pages/home/board_modify';
 
@@ -24,7 +24,7 @@ import { HttpService } from '../providers/http/httpService';
     ContactPage,
     HomePage,
     TabsPage,
-    ListPage,
+    // ListPage,
     BoardDetailPage,
     BoardModifyPage
   ],
@@ -40,7 +40,7 @@ import { HttpService } from '../providers/http/httpService';
     ContactPage,
     HomePage,
     TabsPage,
-    ListPage,
+    // ListPage,
     BoardDetailPage,
     BoardModifyPage
   ],

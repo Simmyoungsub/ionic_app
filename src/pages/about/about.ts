@@ -29,6 +29,7 @@ export class AboutPage{
               {
                 text : '확인',
                 handler : () => {
+                  this.item = {'title':'','content':''};
                   this.navCtrl.parent.select(0);
                 }
               }
@@ -47,6 +48,7 @@ export class AboutPage{
             {
               text : '확인',
               handler : () => {
+                this.item = {'title':'','content':''};
                 this.navCtrl.popToRoot();
               }
             }
