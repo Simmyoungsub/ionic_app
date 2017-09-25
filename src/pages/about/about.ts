@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController,Platform } from 'ionic-angular';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
+import { NavigationProvider } from '../../providers/board-service/navy';
 
 @Component({
   selector: 'page-about',
@@ -13,9 +14,18 @@ export class AboutPage{
   constructor(
     public navCtrl: NavController,
     private boardServiceProvider:BoardServiceProvider,
-    private alertCtrl:AlertController
+    private alertCtrl:AlertController,
+    private platform:Platform,
+    private navProvider:NavigationProvider
   ) {
 
+  }
+
+  ionViewDidLoad() {
+      this.platform.registerBackButtonAction(
+          () => {
+        this.navProvider.backButtonAction();
+    });
   }
 
   saveItem(){

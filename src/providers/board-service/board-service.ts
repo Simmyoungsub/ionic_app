@@ -19,7 +19,7 @@ export class BoardServiceProvider {
       public http: Http,
       private httpService:HttpService
   ) {
-    // console.log('Hello BoardServiceProvider Provider');
+
   }
 
   callItemsList(){

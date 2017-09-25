@@ -17,7 +17,6 @@ export class HttpService {
         console.log('Hello BoardServiceProvider Provider');
     }
 
-
     requestGet(url,params){
         return this.http.get(url,{headers:this.headers}).map(res=>res.json());
     }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController,Platform } from 'ionic-angular';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
 import { BoardModifyPage } from './board_modify';
+import { NavigationProvider } from '../../providers/board-service/navy';
 
 @Component({
   selector:'page-board-detail',
@@ -17,10 +18,19 @@ export class BoardDetailPage{
       public navCtrl: NavController,
       private navParams: NavParams,
       private boardServiceProvider:BoardServiceProvider,
-      private alertCtrl:AlertController
+      private alertCtrl:AlertController,
+      private platform:Platform,
+      private navProvider:NavigationProvider
   ) {
-    this.pk = this.navParams.get('seq');
-    this.getItem();
+      this.pk = this.navParams.get('seq');
+      this.getItem();
+  }
+
+  ionViewDidLoad() {
+      this.platform.registerBackButtonAction(
+          () => {
+        this.navProvider.backButtonAction();
+    });
   }
 
   getItem(){

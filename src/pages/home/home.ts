@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController, AlertController,Platform  } from 'ionic-angular';
 import { Item } from '../Item/item';
 import { BoardServiceProvider } from '../../providers/board-service/board-service';
 import { BoardDetailPage } from './board_detail';
+import { NavigationProvider } from '../../providers/board-service/navy';
 
 @Component({
   selector: 'page-home',
@@ -18,9 +19,18 @@ export class HomePage{
     constructor(
         public navCtrl: NavController,
         private boardServiceProvider:BoardServiceProvider,
-        private alertCtrl:AlertController
+        private alertCtrl:AlertController,
+        private platform: Platform,
+        public navProvider:NavigationProvider
     ) {
         this.getItems();
+    }
+
+    ionViewDidLoad() {
+        this.platform.registerBackButtonAction(
+            () => {
+          this.navProvider.backButtonAction();
+      });
     }
 
     /**

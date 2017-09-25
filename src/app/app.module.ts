@@ -8,13 +8,13 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-// import { ListPage } from '../pages/list/list';
 import { BoardDetailPage } from '../pages/home/board_detail';
 import { BoardModifyPage } from '../pages/home/board_modify';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { BoardServiceProvider } from '../providers/board-service/board-service';
+import { NavigationProvider } from '../providers/board-service/navy';
 import { HttpService } from '../providers/http/httpService';
 
 @NgModule({
@@ -24,7 +24,6 @@ import { HttpService } from '../providers/http/httpService';
     ContactPage,
     HomePage,
     TabsPage,
-    // ListPage,
     BoardDetailPage,
     BoardModifyPage
   ],
@@ -40,7 +39,6 @@ import { HttpService } from '../providers/http/httpService';
     ContactPage,
     HomePage,
     TabsPage,
-    // ListPage,
     BoardDetailPage,
     BoardModifyPage
   ],
@@ -49,7 +47,8 @@ import { HttpService } from '../providers/http/httpService';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     BoardServiceProvider,
-    HttpService
+    HttpService,
+    NavigationProvider
   ]
 })
 export class AppModule {}
