@@ -4,15 +4,14 @@ import { App } from "ionic-angular/index";
 
 @Injectable()
 export class NavigationProvider {
-    private navCtrl: NavController;
+
+    private navCtrl: NavController
 
     constructor(
         private platform:Platform,
-        private app:App
+        private app:App,
     ){
-        platform.ready().then(() => {
-          //this.navCtrl = app.getActive();
-        });
+      //this.navCtrl = app.getActiveNavs()[0];
     }
 
     backButtonAction() {
@@ -45,9 +44,8 @@ export class NavigationProvider {
         //     this.exitAppAlertAction();
         //   }
         // }
-
-        const view = this.navCtrl.getActive();
-        if(view.component.name == "HomePage"){
+        const view = this.app.getActiveNav().getViews()[0];
+        if(view.name == "HomePage"){
             navigator['app'].exitApp();
         }else{
             this.navCtrl.parent.select(0);
